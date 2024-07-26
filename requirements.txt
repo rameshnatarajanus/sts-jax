@@ -9,8 +9,10 @@ seaborn
 tqdm
 flax
 scikit-learn
-blackjax
+blackjax>=1.2.2
 jaxopt
 jaxtyping
 typing-extensions
+bs4
+holidays
 dynamax @ git+https://github.com/probml/dynamax.git#egg=dynamax

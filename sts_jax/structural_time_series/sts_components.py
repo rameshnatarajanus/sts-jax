@@ -872,6 +872,8 @@ class LinearRegression(STSRegression):
         covariates: Float[Array, "num_timesteps dim_covariates"],
         obs_time_series: Float[Array, "num_timesteps dim_obs"],
     ) -> None:
+
+        inputs = covariates
         if self.add_bias:
             inputs = jnp.concatenate((covariates, jnp.ones((covariates.shape[0], 1))), axis=1)
         W = jnp.linalg.solve(inputs.T @ inputs, inputs.T @ obs_time_series).T
@@ -880,6 +882,7 @@ class LinearRegression(STSRegression):
     def get_reg_value(
         self, params: ParamsSTSComponent, covariates: Float[Array, "num_timesteps dim_covariates"]
     ) -> Float[Array, "num_timesteps dim_obs"]:
+
         if self.add_bias:
             inputs = jnp.concatenate((covariates, jnp.ones((covariates.shape[0], 1))), axis=1)
             return inputs @ params["weights"].T
